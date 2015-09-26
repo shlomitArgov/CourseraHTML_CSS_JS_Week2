@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+  </head>
+  <body onload="do_game()">
+
+    <script>
+      var colors = ["Red", "Aqua", "Navy", "Violet", "Yellow", "Tomato", "Plum", "Orange", "Olive"];
+      function do_game()
+      {
+        var finished = false;
+        var guesses = 0;
+        var target = colors[Math.floor(Math.random() * (colors.length))];
+
+        colors.sort();
+        alert("Target is: " + target);
+        while(!finished)
+        {
+          guesses++;
+          var guess = prompt("I am thinking of one of these colors:\n\n" + colors + "\n\nWhat color am I thinking of?");
+          finished = check_guess(guess, target, guesses);
+        }
+      }
+
+      function check_guess(guess, target, guesses)
+      {
+        if(colors.indexOf(guess) < 0)
+        {
+          alert("I don\'t recognize that color!");
+          return false;
+        }
+        if (guess < target)
+        {
+            alert("Your input is alphabetically lower than mine!");
+            return false;
+        }
+        if(guess > target)
+        {
+          alert("Your input is alphabetically higher than mine!");
+          return false;
+        }
+        if (guess == target)
+        {
+          myBody=document.getElementsByTagName("body")[0];
+          myBody.style.background=target;
+          alert("You are right! You took " + guesses + " guesses!");
+          return true;
+        }
+      }
+    </script>
+  </body>
+</html>
